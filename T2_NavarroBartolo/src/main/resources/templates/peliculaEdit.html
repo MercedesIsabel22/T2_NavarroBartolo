@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Curso</title>
+    <!-- Agregar la referencia a los archivos CSS de Bootstrap (localmente o a través de CDN) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Mi Aplicación</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Acerca de</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Cursos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1 class="mt-5">Editar Pelicula</h1>
+
+    <form action="/api/v1/pelicula/edit" method="post">
+
+        <input type="hidden" th:value="${pelicula.getId}" name="id" />
+
+        <div class="form-group">
+            <label for="nombrePelicula">Nombre de la Pelicula</label>
+            <input type="text" class="form-control"
+                   th:value="${pelicula.getNombre}"
+                   id="pelicula" name="pelicula" placeholder="Ingrese el nombre de la Pelicula" required>
+        </div>
+        <div class="form-group">
+            <label for="nombreDirector">Nombre del Director</label>
+            <textarea class="form-control" id="director"
+                      th:text="${pelicula.getDirector}"
+                      name="director" placeholder="Ingrese el nombre del Director"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="genero">Genero</label>
+            <select class="form-control" name="idGenero">
+                <option th:each="genero: ${generos}" th:value="${genero.getId}" th:text="${genero.getNombre}"
+                        th:selected="${pelicula.getGenero.getId == genero.getId}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Editar Pelicula</button>
+    </form>
+
+</div>
+
+<!-- Agregar la referencia a los archivos JavaScript de Bootstrap (localmente o a través de CDN) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
